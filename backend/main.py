@@ -96,7 +96,11 @@ async def chat(request : ChatRequest):
 
     prompt=ChatPromptTemplate.from_template(
         """
-        Answer the question based on the context below.
+        You are a helpful AI assistant. 
+
+        If the question is related to the uploaded document, use the context below to answer.
+        If the question is conversational or based on chat history, use the chat history to answer.
+        Always prioritize chat history for follow-up questions.
 
         Chat History:{history}
         Context:{context}

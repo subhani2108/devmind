@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-     <div className="min-h-screen bg-gray-950 text-white">
+     <div className="min-h-screen bg-gray-950 text-white scrollbar-none">
         {/* Header */}
         <header className="p-4 border-b bg-gray-800">
           <h1 className="text-2xl font-bold text-blue-400">🧠 DevMind</h1>
