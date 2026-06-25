@@ -2,8 +2,9 @@
 
 A full-stack AI-powered application that lets you upload documents and chat with them using RAG (Retrieval Augmented Generation) and an intelligent LangGraph Agent.
 
+
 ## 🚀 Live Demo
-[Add your demo video link here]
+[DevMind Live](https://devmind-xt19-pwxx70tde-subhani-personal.vercel.app/)
 
 ## ✨ Features
 
