@@ -27,8 +27,8 @@ const ChatWindow = () => {
   const mutation = useMutation({
     mutationFn: async (question) => {
       const endpoint = mode === 'agent' ?
-        'http://localhost:8000/agent' :
-        'http://localhost:8000/chat'
+        'https://devmind-backend-pd6p.onrender.com/agent' :
+        'https://devmind-backend-pd6p.onrender.com/chat'
       const response = await axios.post(endpoint, { question })
       return response.data.answer
     },

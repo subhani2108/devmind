@@ -21,7 +21,7 @@ const FileUpload = () => {
       setStatus('Uploading...')
 
       const response=await axios.post(
-        'http://localhost:8000/upload',
+        'https://devmind-backend-pd6p.onrender.com/upload',
         formData
       )
       dispatch(setUploadedFile(file.name))
