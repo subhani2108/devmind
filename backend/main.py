@@ -37,7 +37,8 @@ app.add_middleware(
 parser=StrOutputParser()
 
 class ChatRequest(BaseModel):
-    question:str
+    question: str
+    history: list = []
 
 @app.get('/')
 def health_check():
@@ -96,16 +97,23 @@ async def chat(request : ChatRequest):
     prompt=ChatPromptTemplate.from_template(
         """
         Answer the question based on the context below.
+
+        Chat History:{history}
         Context:{context}
         Question:{question}
         """
     )
 
+    formatted_history = "\n".join([
+    f"{msg['role'].upper()}: {msg['content']}" 
+    for msg in request.history
+    ])
+
     # Step4 : Building Chain
 
     llm=ChatOpenAI(model="gpt-4o-mini")
 
-    chain=({"context":retriever , "question":RunnablePassthrough()}
+    chain=({"context":retriever , "question":RunnablePassthrough(),"history": lambda _: formatted_history}
            | prompt | llm | parser)
 
     # Step5 : Run and Return Answer
@@ -144,8 +152,11 @@ async def agent_chat(request:ChatRequest):
         tools=tools
     )
 
-    result=agent.invoke({
-        "messages":[{"role":"user","content":question}]
+    result = agent.invoke({
+    "messages": [
+        *[{"role": msg["role"], "content": msg["content"]} for msg in request.history],
+        {"role": "user", "content": question}
+    ]
     })
     answer=result["messages"][-1].content
 

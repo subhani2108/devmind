@@ -29,7 +29,7 @@ const ChatWindow = () => {
       const endpoint = mode === 'agent' ?
         'https://devmind-backend-pd6p.onrender.com/agent' :
         'https://devmind-backend-pd6p.onrender.com/chat'
-      const response = await axios.post(endpoint, { question })
+      const response = await axios.post(endpoint, { question, history:messages})
       return response.data.answer
     },
     onSuccess: (answer) => {
